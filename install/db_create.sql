@@ -1,1 +1,2 @@
-CREATE TABLE ();
+CREATE TABLE (
+);
