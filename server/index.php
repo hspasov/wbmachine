@@ -1,10 +1,14 @@
 <?php
 
 require "server/modules/utils.php";
+require "server/modules/DBConn.php";
+require "server/modules/Consts.php";
+
+$dbh = new DBConn();
+
+$endpoint = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-  $endpoint = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
   switch($endpoint) {
   case '/':
     $title = 'Wayback Machine';
@@ -13,16 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   case '/archive':
     $title = 'Archive page';
     $view = 'archive';
-    $schedule_intervals = [
-      [
-        "id" => 1,
-        "name" => "Test1",
-      ],
-      [
-        "id" => 2,
-        "name" => "Test2",
-      ],
-    ];
+
+    $sth = $dbh->sql("
+      SELECT *
+      FROM schedule_intervals
+      ORDER BY id
+    ");
+
+    $schedule_intervals = $sth->fetchAll();
+
     break;
   default:
     http_response_code(404);
@@ -31,7 +34,115 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
   require "views/layout.html";
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  switch($endpoint) {
+  case '/archive':
+    assert_peer(!empty($_POST['url']), "Missing param `url`");
+    assert_peer(!empty($_POST['schedule_interval_id']), "Missing param `schedule_interval_id`");
 
+    $title = 'Archive page';
+    $view = 'archive';
+
+    $sth = $dbh->sql("
+      SELECT *
+      FROM schedule_intervals
+      ORDER BY id
+    ");
+
+    $schedule_intervals = $sth->fetchAll();
+
+    if ($_POST['schedule_interval_id'] == SCHD_INTVL_NONE) {
+      $dbh->sql("
+        DELETE
+        FROM archive_schedules
+        WHERE site_id IN (
+          SELECT id
+          FROM sites
+          WHERE url = ?
+        )
+      ", [$_POST['url']]);
+
+      $success_msg = "Successfully removed archive schedule!";
+      http_response_code(200);
+      break;
+    }
+
+    $dbh->sql("
+      INSERT INTO sites (url)
+      SELECT ?
+      WHERE NOT EXISTS (
+        SELECT 1
+        FROM sites
+        WHERE url = ?
+      )
+    ", [$_POST['url'], $_POST['url']]);
+
+    $sth = $dbh->sql("
+      SELECT *
+      FROM sites
+      WHERE url = ?
+    ", [$_POST['url']]);
+
+    $row = $sth->fetch();
+    $site_id = $row['id'];
+
+    if ($_POST['schedule_interval_id'] == SCHD_INTVL_NOW) {
+      $dbh->sql("
+        INSERT INTO archives (site_id, status_id)
+        SELECT ?, ?
+        WHERE NOT EXISTS (
+          SELECT 1
+          FROM archives
+          WHERE site_id = ?
+            AND status_id = ?
+        )
+      ", [$site_id, ARCH_STATUS_PENDING, $site_id, ARCH_STATUS_PENDING]);
+
+      $success_msg = "Successfully added site to be archived!";
+      http_response_code(200);
+      break;
+    }
+
+    $dbh->sql("
+      UPDATE archive_schedules
+      SET schedule_interval_id = ?
+      WHERE site_id = ?
+    ", [$_POST['schedule_interval_id'], $site_id]);
+
+    $sth = $dbh->sql("
+      INSERT INTO archive_schedules (schedule_interval_id, site_id)
+      SELECT ?, ?
+      WHERE NOT EXISTS (
+        SELECT 1
+        FROM archive_schedules
+        WHERE site_id = ?
+      )
+    ", [$_POST['schedule_interval_id'], $site_id, $site_id]);
+
+    if ($sth->rowCount() > 0) {
+      $dbh->sql("
+        INSERT INTO archives (site_id, status_id)
+        SELECT ?, ?
+        WHERE NOT EXISTS (
+          SELECT 1
+          FROM archives
+          WHERE site_id = ?
+        )
+      ", [$site_id, ARCH_STATUS_PENDING, $site_id]);
+    }
+
+    $success_msg = "Successfully set archive schedule!";
+    http_response_code(200);
+    break;
+  default:
+    http_response_code(400);
+    die;
+  }
+
+  if (!empty($_POST['is_ui'])) {
+    require "views/layout.html";
+  }
 } else {
   die;
 }
+
+$dbh->commit();
