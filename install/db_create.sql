@@ -1,6 +1,10 @@
+CREATE DATABASE wbmachine;
+
+USE wbmachine;
+
 CREATE TABLE sites (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  url VARCHAR(2048) UNIQUE NOT NULL,
+  url VARCHAR(512) UNIQUE NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -22,11 +26,13 @@ VALUES
 
 CREATE TABLE archives (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
-  id_hash CHAR(36) NOT NULL DEFAULT UUID(),
+  id_hash CHAR(36) NOT NULL DEFAULT (UUID()),
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  site_id BIGINT NOT NULL FOREIGN KEY REFERENCES sites(id),
-  status_id BIGINT NOT NULL FOREIGN KEY REFERENFES archive_statuses(id)
+  site_id BIGINT NOT NULL,
+  status_id BIGINT NOT NULL,
+  FOREIGN KEY (site_id) REFERENCES sites(id),
+  FOREIGN KEY (status_id) REFERENCES archive_statuses(id)
 );
 
 CREATE INDEX archives_id_hash_idx ON archives (id_hash);
@@ -57,9 +63,11 @@ VALUES
 CREATE TABLE archive_schedules (
   id BIGINT AUTO_INCREMENT PRIMARY KEY,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  schedule_interval BIGINT NOT NULL FOREIGN KEY REFERENCES schedule_intervals(id) CHECK (schedule_interval NOT IN (10, 20)),
-  site_id BIGINT UNIQUE NOT NULL FOREIGN KEY REFERENCES sites(id)
+  schedule_interval_id BIGINT NOT NULL CHECK (schedule_interval_id NOT IN (10, 20)),
+  site_id BIGINT UNIQUE NOT NULL,
+  FOREIGN KEY (schedule_interval_id) REFERENCES schedule_intervals(id),
+  FOREIGN KEY (site_id) REFERENCES sites(id)
 );
 
-CREATE INDEX archive_schedules_schedule_interval_idx ON archive_schedules (schedule_interval);
+CREATE INDEX archive_schedules_schedule_interval_id_idx ON archive_schedules (schedule_interval_id);
 CREATE INDEX archive_schedules_site_id_idx ON archive_schedules (site_id);
