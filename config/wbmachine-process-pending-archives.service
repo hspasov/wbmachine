@@ -1,0 +1,9 @@
+[Unit]
+Description=Process pending archives every minute
+
+[Service]
+Environment=DBHOST='localhost'
+Environment=DBNAME='wbmachine'
+Environment=DBUSER='wbmachine'
+Environment=DBPASS='ParolataESlozhna'
+ExecStart=php --define zend.assertions=1 --define include_path=/media/hspasov/Files/FMI/WEB/project/wbmachine /media/hspasov/Files/FMI/WEB/project/wbmachine/scripts/process_pending_archives.php

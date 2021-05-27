@@ -1,7 +1,9 @@
 <?php
 
+ini_set('assert.exception', 1);
+
 define('ARCHIVE_STORE_PATH', '/var/lib/wbmachine');
-define('LOG_PATH', '/var/log/wbmachinelog');
+define('LOG_FILE', '/var/log/wbmachinelog');
 
 define('SCHD_INTVL_NONE', 10);
 define('SCHD_INTVL_NOW', 20);
