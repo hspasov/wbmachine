@@ -41,6 +41,10 @@ CREATE INDEX archives_updated_at_idx ON archives (updated_at);
 CREATE INDEX archives_site_id_idx ON archives (site_id);
 CREATE INDEX archives_status_id_idx ON archives (status_id);
 
+CREATE TRIGGER archives_update_trig
+BEFORE UPDATE ON archives
+FOR EACH ROW SET NEW.updated_at = CURRENT_TIMESTAMP;
+
 CREATE TABLE schedule_intervals (
   id BIGINT PRIMARY KEY,
   name VARCHAR(64) UNIQUE NOT NULL,

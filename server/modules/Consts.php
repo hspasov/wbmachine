@@ -1,5 +1,8 @@
 <?php
 
+define('ARCHIVE_STORE_PATH', '/var/lib/wbmachine');
+define('LOG_PATH', '/var/log/wbmachinelog');
+
 define('SCHD_INTVL_NONE', 10);
 define('SCHD_INTVL_NOW', 20);
 define('SCHD_INTVL_EVERY_MONTH', 30);
