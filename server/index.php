@@ -1,6 +1,6 @@
 <?php
 
-require "server/modules/utils.php";
+require "server/modules/Utils.php";
 require "server/modules/DBConn.php";
 require "server/modules/Consts.php";
 

@@ -75,3 +75,6 @@ CREATE TABLE archive_schedules (
 
 CREATE INDEX archive_schedules_schedule_interval_id_idx ON archive_schedules (schedule_interval_id);
 CREATE INDEX archive_schedules_site_id_idx ON archive_schedules (site_id);
+
+CREATE USER wbmachine@localhost IDENTIFIED BY 'ParolataESlozhna';
+GRANT ALL PRIVILEGES ON wbmachine.* TO wbmachine@localhost;

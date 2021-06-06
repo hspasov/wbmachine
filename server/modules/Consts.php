@@ -1,7 +1,5 @@
 <?php
 
-ini_set('assert.exception', 1);
-
 define('ARCHIVE_STORE_PATH', '/var/lib/wbmachine');
 define('LOG_FILE', '/var/log/wbmachinelog');
 
