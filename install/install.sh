@@ -1,9 +1,6 @@
-apt -y install apache2
-apt -y install libapache2-mod-php
-apt -y install php
-apt -y install php-mysql
-apt -y install mysql-server
+apt -y install apache2 libapache2-mod-php php php-mysql mysql-server
 mysql < install/db_create.sql
+mkdir /var/lib/wbmachine
 mkdir /usr/share/wbmachine
 cp -r . /usr/share/wbmachine
 mkdir -p /usr/share/wbmachine/views/public
