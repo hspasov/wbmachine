@@ -1,7 +1,7 @@
-<?php if (!empty($success_msg)): ?>
-  <p><?=$success_msg?></p>
+<?php if (!empty($msg)): ?>
+  <p><?=$msg?></p>
 <?php endif; ?>
-<form action="/view" method="post">
+<form action="/view" method="get">
   <label for="url">URL</label>
   <input type="text" id="url" name="url" required />
   <input type="submit" />

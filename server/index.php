@@ -29,8 +29,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   case '/view':
     $title = 'View page';
     $view = 'view';
-    break;
+    $url = $_GET['url'];
 
+    $sth = $dhb->sql("
+      SELECT created_at
+      FROM sites
+      WHERE url=$url
+      ORDER BY id
+      ");
+    $timestamps = $sth->fetchAll();
+
+    if(empty($timestamps)){
+        $msg = "No previous archives for site '$url' found."
+    }
+
+    break;
   default:
     http_response_code(404);
     die;
