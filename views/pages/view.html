@@ -1,0 +1,8 @@
+<?php if (!empty($success_msg)): ?>
+  <p><?=$success_msg?></p>
+<?php endif; ?>
+<form action="/view" method="post">
+  <label for="url">URL</label>
+  <input type="text" id="url" name="url" required />
+  <input type="submit" />
+</form>

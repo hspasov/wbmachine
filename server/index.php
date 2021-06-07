@@ -22,11 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       SELECT *
       FROM schedule_intervals
       ORDER BY id
-    ");
-
+      ");
     $schedule_intervals = $sth->fetchAll();
 
     break;
+  case '/view':
+    $title = 'View page';
+    $view = 'view';
+    break;
+
   default:
     http_response_code(404);
     die;
