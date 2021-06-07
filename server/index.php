@@ -29,8 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   case '/view':
     $title = 'View page';
     $view = 'view';
-    break;
 
+    if (!empty($_GET['url'])) {
+       $sth = $dbh->sql("
+         SELECT created_at
+         FROM sites
+         WHERE url = ?
+         ORDER BY id
+         ", [$GET['url']]);
+    $timestamps = $sth->fetchAll();
+    }
+
+    if(empty($timestamps)){
+        $msg = "No previous archives for site '$url' found.";
+    }
+
+    break;
   default:
     http_response_code(404);
     die;

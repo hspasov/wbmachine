@@ -1,8 +1,13 @@
-<?php if (!empty($success_msg)): ?>
-  <p><?=$success_msg?></p>
+<?php if (!empty($msg)): ?>
+  <p><?=$msg?></p>
 <?php endif; ?>
-<form action="/view" method="post">
+<form action="/view" method="get">
   <label for="url">URL</label>
   <input type="text" id="url" name="url" required />
   <input type="submit" />
+  <ul>
+     <?php foreach ($timestamps as $timestamps): ?>
+     <li><a href="$timestamps['id']">"$timestamps['id']"</a></li>
+    <?php endforeach; ?>
+  </ul>
 </form>
