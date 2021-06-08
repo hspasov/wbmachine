@@ -1,6 +1,6 @@
 <?php
 
-define('ARCHIVE_STORE_PATH', '/var/lib/wbmachine');
+define('ARCHIVE_STORE_PATH', '/usr/share/wbmachine/views/public/sites');
 define('LOG_FILE', '/var/log/wbmachinelog');
 
 define('SCHD_INTVL_NONE', 10);

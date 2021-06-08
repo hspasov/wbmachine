@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $timestamps = $sth->fetchAll();
     }
 
-    if(empty($timestamps)){
+    if(empty($timestamps) && !empty($_GET['url'])){
         $msg = "No previous archives for site '$url' found.";
     }
 
