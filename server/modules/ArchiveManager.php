@@ -35,7 +35,7 @@ class ArchiveManager {
     $target_path = ARCHIVE_STORE_PATH . "/" . $archive_info['id_hash'];
 
     mkdir($target_path);
-    chmod($target_path, 0700);
+    chmod($target_path, 0755);
 
     $log_file = LOG_FILE;
     `wget --directory-prefix={$target_path} --convert-links --no-cookies --span-hosts --page-requisites {$archive_info['url']} 2>> {$log_file}`;
