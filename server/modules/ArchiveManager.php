@@ -51,7 +51,13 @@ class ArchiveManager {
     $dbh->commit();
   }
 
-  public function view () {
-    # TODO
+  public function view (int $site_id) {
+    $sth = $dbh->sql("
+      SELECT id_hash
+      FROM archives
+      WHERE id = ?
+    ", [$site_id]);
+
+    return $sth;
   }
 }

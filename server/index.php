@@ -29,19 +29,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   case '/view':
     $title = 'View page';
     $view = 'view';
+    $url = $_GET['url'];
 
-    if (!empty($_GET['url'])) {
+    if (!empty($url)) {
        $sth = $dbh->sql("
-         SELECT created_at
+         SELECT id_hash, created_at
+	 FROM archives
+         WHERE site_id = (
+         SELECT id
          FROM sites
          WHERE url = ?
-         ORDER BY id
-         ", [$GET['url']]);
-    $timestamps = $sth->fetchAll();
+	 ) ORDER BY created_at
+         ", [$url]);
+       
+       $parsed_url = parse_url($url)['host'];       
+       $timestamps = [];
+       $id_hashes = [];
+       while($contents = $sth->fetch()){
+          array_push($timestamps, $contents['created_at']);
+          array_push($id_hashes, $contents['id_hash']);
+       }
     }
-
-    if(empty($timestamps) && !empty($_GET['url'])){
-        $msg = "No previous archives for site '$url' found.";
+   
+    if(empty($timestamps) && !empty($url)){
+        $msg = "No previous archives for site $url found.";
     }
 
     break;

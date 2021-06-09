@@ -5,9 +5,11 @@
   <label for="url">URL</label>
   <input type="text" id="url" name="url" required />
   <input type="submit" />
-  <ul>
-     <?php foreach ($timestamps as $timestamp): ?>
-     <li><a href="<?=$timestamp['id']?>"><?=$timestamp['id']?></a></li>
-    <?php endforeach; ?>
-  </ul>
+  <?php if (!empty($timestamps)): ?>
+     <ul>
+        <?php for($i=0; $i<count($timestamps); $i++): ?>
+	<li><a href="/sites/<?= $id_hashes[$i];?>/<?= $parsed_url;?>"><?= $timestamps[$i]; ?></a></li>
+        <?php endfor; ?>
+     </ul>
+  <?php endif; ?>
 </form>
