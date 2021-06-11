@@ -45,8 +45,7 @@ body{
   background-color: red;
 }
 
-.container input {
-  float: left;
+.buttons input {
   display: block;
   color: white;
   text-align: center;
@@ -55,18 +54,20 @@ body{
   background-color: #333;
   border : none;
   font-size:large;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  margin-bottom:20px;
 }
 
-.container input:hover {
+.buttons input:hover {
   background-color: #111;
 }
 
-.container input:active {
+.buttons input:active {
   background-color: red;
 }
 
+.buttons input:after {
+  content: "";
+  clear: both;
+  display: table;
+}
