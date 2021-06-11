@@ -66,6 +66,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $view = 'site';
     $parsed_url=$_GET['parsed_url'];
     $id_hash=$_GET['id_hash'];
+    $url=$_GET['url'];
+    $timestamp=$_GET['timestamp'];
+
+    $sth = $dbh->sql("
+      SELECT created_at
+      FROM archives
+      WHERE site_id = (
+      SELECT id
+      FROM sites
+      WHERE url = ?
+      ) ORDER BY created_at
+      ", [$url]);
+
+    $timestamps = [];
+    while($contents = $sth->fetch()){
+      array_push($timestamps, $contents['created_at']);
+    }
+
     break;
 
   default:

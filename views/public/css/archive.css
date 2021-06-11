@@ -9,7 +9,7 @@
     border-radius: 25px;
   }
 
-  .wrap input, select {
+  .wrap input, .wrap select {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -21,7 +21,7 @@
     border: 1px solid #ccc;
   }
 
-  .wrap input:focus, select:focus {
+  .wrap input:focus, .wrap select:focus {
     background-color: #ddd;
     outline: none;
   }
@@ -41,5 +41,6 @@
   .wrap input[type=submit]:active {
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
   }
+
 
 

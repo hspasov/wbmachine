@@ -1,0 +1,56 @@
+.siteframe iframe {
+  width:100%;
+  border:none;
+  height:700px;
+}
+
+  
+.url-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #292929;
+  text-align:center;
+  font-size:medium;
+  color:#fff;
+  border:solid black 1px;
+}
+
+.timestamp-bar {
+  width: 100%;
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #333;
+  color: white;
+} 
+.timestamp-bar select {
+  float: left;
+  text-align: center;
+  padding: 18px 16px;
+  text-decoration: none;
+  background-color: #333;
+  border : none;
+  font-size:large;
+  color: white;
+}
+
+.timestamp-bar label {
+  float: left;
+  display: inline;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  background-color: #333;
+  border : none;
+  font-size:large;
+}
+

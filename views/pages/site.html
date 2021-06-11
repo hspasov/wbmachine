@@ -1,14 +1,24 @@
-<nav class="top-bar">
-      <form action="/" class="bar-item">
-        <input type="submit" value="Home" />
-      </form>
-      <form action="/archive" class="bar-item">
-        <input type="submit" value="Archive Page" />
-      </form>
-      <form action="/view" class="bar-item">
-        <input type="submit" value="Browse Archives" />
-      </form>
-    </nav>
-<div>
-<iframe src="/sites/<?= $id_hash;?>/<?= $parsed_url;?>"></iframe>
+<style>
+  #site {
+    margin-bottom:0px;
+  }
+</style>
+
+<nav class="url-bar">
+  <p>Displayed webpage: <?= $url;?></p>
+  <p>Current timestamp: <?= $timestamp;?></p>
+</nav>
+
+<nav class="timestamp-bar">
+    <form>
+    <label for="timestamp-id">Select different archive</label>
+    <select id="timestamp-id" name="timestamp-id" required />
+      <?php for($i=0; $i<count($timestamps); $i++): ?>
+        <option value="<?=$timestamps[$i];?>"><?=$timestamps[$i];?></option>
+      <?php endfor; ?>
+    </select>
+  </form>
+</nav>
+<div class="siteframe">
+  <iframe src="/sites/<?= $id_hash;?>/<?= $parsed_url;?>"></iframe>
 </div>

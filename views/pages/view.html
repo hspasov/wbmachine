@@ -11,7 +11,7 @@
       <?php if (!empty($timestamps)): ?>
         <ul>
           <?php for($i=0; $i<count($timestamps); $i++): ?>
-	  <li><a href="/site?parsed_url=<?= $parsed_url;?>&id_hash=<?= $id_hashes[$i];?>"><?= $timestamps[$i]; ?></a></li>
+	  <li><a href="/site?timestamp=<?= $timestamps[$i];?>&parsed_url=<?= $parsed_url;?>&id_hash=<?= $id_hashes[$i];?>&url=<?= $url;?>"><?= $timestamps[$i]; ?></a></li>
           <?php endfor; ?>
         </ul>
       <?php endif; ?>

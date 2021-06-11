@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/archive.css">
     <link rel="stylesheet" href="/css/view.css">
+    <link rel="stylesheet" href="/css/site.css">
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="top-bar">
+    <nav class="top-bar" id="site">
       <form action="/" class="bar-item">
         <input type="submit" value="Home" />
       </form>
@@ -22,6 +23,7 @@
         <input type="submit" value="Browse Archives" />
       </form>
     </nav>
+    <!-- Load Page -->
     <?php require "views/pages/$view.html" ?>
   </body>
 </html>
