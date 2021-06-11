@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
 body{
   margin : 0px;
   height: 100vh;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  font-family: 'Poppins',sans-serif;
 }
 
 .top-bar {
@@ -66,3 +69,4 @@ body{
 .container input:active {
   background-color: red;
 }
+

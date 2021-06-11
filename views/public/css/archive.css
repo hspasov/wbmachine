@@ -5,7 +5,7 @@
     transform: translate(-50%, -50%);
     width:fit-content;
     padding: 15px;
-    background: #9a9797;
+    background: #fff;
     border-radius: 25px;
   }
 
@@ -18,18 +18,28 @@
     background: #f1f0f0;
     overflow: hidden;
     box-sizing: border-box;
+    border: 1px solid #ccc;
   }
 
   .wrap input:focus, select:focus {
     background-color: #ddd;
     outline: none;
   }
+  .wrap input[type=submit] {
+   border: none;
+   color: #fff;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+  }
 
   .wrap input[type=submit]:hover {
-    background-color: #ddd;
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
   }
 
   .wrap input[type=submit]:active {
-    background-color: #b5b2b2;
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
   }
+
 
