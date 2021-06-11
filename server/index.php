@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $title = 'View page';
     $view = 'view';
     $url = $_GET['url'];
-
     if (!empty($url)) {
        $sth = $dbh->sql("
          SELECT id_hash, created_at
@@ -61,6 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     break;
+
+  case '/site':
+    $title = 'View Page';
+    $view = 'site';
+    $parsed_url=$_GET['parsed_url'];
+    $id_hash=$_GET['id_hash'];
+    break;
+
   default:
     http_response_code(404);
     die;

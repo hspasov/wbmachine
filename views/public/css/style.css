@@ -45,9 +45,9 @@ body{
   background-color: red;
 }
 
-.container input[type=submit] {
+.archive input[type=submit] {
    color: #fff;
-   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+   background: linear-gradient(-135deg, #71b7e6, #9b59b6);
    font-size: 18px;
    font-weight: 500;
    letter-spacing: 1px;
@@ -56,12 +56,14 @@ body{
    text-align: center;
    margin:0 auto;
    display:flex;
+   border:solid #888888 1px;
+   box-shadow: 5px 10px #888888;
 }
 
-.container input[type=submit]:hover {
+.archive input[type=submit]:hover {
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
 
-.container input[type=submit]:active {
+.archive input[type=submit]:active {
     background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
