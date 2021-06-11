@@ -14,6 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $title = 'Wayback Machine';
     $view = 'home';
     break;
+  case '/home':
+    $title = 'Wayback Machine';
+    $view = 'home';
+    break;
+
   case '/archive':
     $title = 'Archive page';
     $view = 'archive';
