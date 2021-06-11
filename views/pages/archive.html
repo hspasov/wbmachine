@@ -1,15 +1,18 @@
-<?php if (!empty($success_msg)): ?>
+<div class="wrap">
+  <h1>Archive site</h1>	
+  <?php if (!empty($success_msg)): ?>
   <p><?=$success_msg?></p>
-<?php endif; ?>
-<form action="/archive" method="post">
-  <label for="url">URL</label>
-  <input type="text" id="url" name="url" required />
-  <label for="schedule-interval-id">Schedule interval</label>
-  <select id="schedule-interval-id" name="schedule_interval_id" required />
-    <?php foreach ($schedule_intervals as $schedule_interval): ?>
-      <option value="<?=$schedule_interval['id']?>"><?=$schedule_interval['name']?></option>
-    <?php endforeach; ?>
-  </select>
-  <input type="hidden" id="is-ui" name="is_ui" value="true" />
-  <input type="submit" />
-</form>
+  <?php endif; ?>
+  <form action="/archive" method="post">
+    <label for="url">URL</label>
+    <input type="text" id="url" name="url" required />
+    <label for="schedule-interval-id">Schedule interval</label>
+    <select id="schedule-interval-id" name="schedule_interval_id" required />
+      <?php foreach ($schedule_intervals as $schedule_interval): ?>
+        <option value="<?=$schedule_interval['id']?>"><?=$schedule_interval['name']?></option>
+      <?php endforeach; ?>
+    </select>
+    <input type="hidden" id="is-ui" name="is_ui" value="true" />
+    <input type="submit" />
+  </form>
+</div>

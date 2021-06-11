@@ -1,10 +1,19 @@
+body{
+  margin : 0px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+
 .top-bar {
   width: 100%;
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: #333; 
+  margin-bottom: 20px;
 }
 
 .top-bar input {
@@ -19,6 +28,11 @@
   font-size:large;
 }
 
+.container h1, h2{
+  color:#000;
+  text-decoration:none;
+  text-align: center;
+}
 
 .top-bar input:hover {
   background-color: #111;
@@ -26,12 +40,6 @@
 
 .top-bar input:active {
   background-color: red;
-}
-
-h1, h2{
-  color:#000;
-  text-decoration:none;
-  text-align: center;
 }
 
 .container input {

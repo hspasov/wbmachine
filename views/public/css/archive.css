@@ -1,0 +1,35 @@
+.wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:fit-content;
+    padding: 15px;
+    background: #9a9797;
+    border-radius: 25px;
+  }
+
+  .wrap input, select {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f0f0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .wrap input:focus, select:focus {
+    background-color: #ddd;
+    outline: none;
+  }
+
+  .wrap input[type=submit]:hover {
+    background-color: #ddd;
+  }
+
+  .wrap input[type=submit]:active {
+    background-color: #b5b2b2;
+  }
+
