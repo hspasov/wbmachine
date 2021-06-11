@@ -1,19 +1,21 @@
-<div class="wrap">
-  <h1>Explore webpages saved over time</h1>
-  <?php if (!empty($msg)): ?>
-    <p><?=$msg?></p>
-  <?php endif; ?>
-  <form action="/view" method="get">
-    <label for="url">URL</label>
-    <input type="text" id="url" name="url" required />
-    <input type="submit" />
-
-    <?php if (!empty($timestamps)): ?>
-      <ul>
-        <?php for($i=0; $i<count($timestamps); $i++): ?>
-          <li><a href="/sites/<?= $id_hashes[$i];?>/<?= $parsed_url;?>"><?= $timestamps[$i]; ?></a></li>
-        <?php endfor; ?>
-      </ul>
+  <div class="wrap">
+    <h1>Explore webpages saved over time</h1>
+    <?php if (!empty($msg)): ?>
+      <p><?=$msg?></p>
     <?php endif; ?>
-  </form>
-</div>
+    <form action="/view" method="get">
+      <label for="url">URL</label>
+      <input type="text" id="url" name="url" required />
+      <input type="submit" />
+
+      <div class="links">
+        <?php if (!empty($timestamps)): ?>
+          <ul>
+            <?php for($i=0; $i<count($timestamps); $i++): ?>
+              <li><a href="/sites/<?= $id_hashes[$i];?>/<?= $parsed_url;?>"><?= $timestamps[$i]; ?></a></li>
+            <?php endfor; ?>
+          </ul>
+        <?php endif; ?>
+      </div>
+    </form>
+  </div>
