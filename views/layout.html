@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
+    <!-- Navbar -->
+    <nav class="top-bar">
+      <form action="/" class="bar-item">
+        <input type="submit" value="Home" />
+      </form>
+      <form action="/archive" class="bar-item">
+        <input type="submit" value="Archive Page" />
+      </form>
+      <form action="/view" class="bar-item">
+        <input type="submit" value="Browse Archives" />
+      </form>
+    </nav>
     <?php require "views/pages/$view.html" ?>
   </body>
 </html>
