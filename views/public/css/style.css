@@ -45,29 +45,23 @@ body{
   background-color: red;
 }
 
-.buttons input {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  background-color: #333;
-  border : none;
-  font-size:large;
-  margin: 0 auto;
-  margin-bottom:20px;
+.container input[type=submit] {
+   color: #fff;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   padding:10px;
+   border:none;
+   text-align: center;
+   margin:0 auto;
+   display:flex;
 }
 
-.buttons input:hover {
-  background-color: #111;
+.container input[type=submit]:hover {
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
 
-.buttons input:active {
-  background-color: red;
-}
-
-.buttons input:after {
-  content: "";
-  clear: both;
-  display: table;
+.container input[type=submit]:active {
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
