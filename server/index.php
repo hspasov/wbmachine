@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $timestamp=$_GET['timestamp'];
 
     $sth = $dbh->sql("
-      SELECT created_at
+      SELECT id_hash, created_at
       FROM archives
       WHERE site_id = (
       SELECT id
@@ -80,8 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       ", [$url]);
 
     $timestamps = [];
+    $id_hashes = [];
     while($contents = $sth->fetch()){
       array_push($timestamps, $contents['created_at']);
+      array_push($id_hashes, $contents['id_hash']);
     }
 
     break;
