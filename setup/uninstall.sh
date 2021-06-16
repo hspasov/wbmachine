@@ -9,3 +9,4 @@ systemctl restart apache2
 mysql < setup/db_drop.sql
 rm -rv /usr/share/wbmachine
 rm -rv /var/lib/wbmachine
+userdel --remove wbmachine

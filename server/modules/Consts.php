@@ -1,7 +1,11 @@
 <?php
 
 define('ARCHIVE_STORE_PATH', '/usr/share/wbmachine/views/public/sites');
+define('TMP_ARCHIVE_STORE_PATH', '/tmp/wbmachine/');
 define('LOG_FILE', '/var/log/wbmachinelog');
+
+define('S3_LOCATION', 's3://wbmachine');
+define('S3_REGION', 'us-east-1');
 
 define('SCHD_INTVL_NONE', 10);
 define('SCHD_INTVL_NOW', 20);

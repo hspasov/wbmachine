@@ -3,7 +3,7 @@
 require "server/modules/Utils.php";
 require "server/modules/DBConn.php";
 require "server/modules/Consts.php";
-require "server/modules/ArchiveManager.php";
+require "server/modules/S3ArchiveManager.php";
 
 function start () {
   $dbh = new DBConn();
@@ -16,7 +16,7 @@ function start () {
   ", [ARCH_STATUS_PENDING]);
 
   while ($archive = $sth->fetch()) {
-    $arch_manager = new ArchiveManager($archive['id']);
+    $arch_manager = new S3ArchiveManager($archive['id']);
     $arch_manager->fetch_and_store();
   }
 }

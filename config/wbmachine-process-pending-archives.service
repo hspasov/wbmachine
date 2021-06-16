@@ -8,3 +8,5 @@ Environment=DBNAME='wbmachine'
 Environment=DBUSER='wbmachine'
 Environment=DBPASS='ParolataESlozhna'
 ExecStart=php --php-ini /usr/share/wbmachine/config/php.ini /usr/share/wbmachine/scripts/process_pending_archives.php
+User=wbmachine
+Group=wbmachine
