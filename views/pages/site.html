@@ -15,12 +15,12 @@
     <select id="timestamp-id" name="timestamp-id" required onchange="location = this.options[this.selectedIndex].value;">
       <option value="none" selected disabled hidden><?= $timestamp;?></option>
       <?php for($i=0; $i<count($timestamps); $i++): ?>
-        <option value="/site?timestamp=<?= $timestamps[$i];?>&parsed_url=<?= $parsed_url;?>&id_hash=<?= $id_hashes[$i];?>&url=<?= $url;?>"><?=$timestamps[$i];?></option>
+        <option value="/site?timestamp=<?= $timestamps[$i];?>&resource=<?= $resource;?>&id_hash=<?= $id_hashes[$i];?>&url=<?= $url;?>"><?=$timestamps[$i];?></option>
       <?php endfor; ?>
     </select>
   </form>
 </nav>
 
 <div class="siteframe">
-  <iframe src="/sites/<?= $id_hash;?>/<?= $parsed_url;?>"></iframe>
+  <iframe src="https://wbmachine.s3.amazonaws.com/<?= $id_hash;?>/<?= $resource;?>"></iframe>
 </div>

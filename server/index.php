@@ -46,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 	 ) ORDER BY created_at
          ", [$url]);
        
-       $parsed_url = parse_url($url)['host'];       
+      $parsed_url = parse_url($url);
+      $resource = $parsed_url['host'] . $parsed_url['path'];
        $timestamps = [];
        $id_hashes = [];
        while($contents = $sth->fetch()){
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   case '/site':
     $title = 'View Page';
     $view = 'site';
-    $parsed_url=$_GET['parsed_url'];
+    $resource=$_GET['resource'];
     $id_hash=$_GET['id_hash'];
     $url=$_GET['url'];
     $timestamp=$_GET['timestamp'];

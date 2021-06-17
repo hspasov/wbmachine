@@ -36,6 +36,11 @@ class S3ArchiveManager {
 
     $archive_info = $sth->fetch();
 
+    if (!file_exists(TMP_ARCHIVE_STORE_PATH)) {
+      mkdir(TMP_ARCHIVE_STORE_PATH);
+      chmod(TMP_ARCHIVE_STORE_PATH, 0755);
+    }
+
     $target_path = TMP_ARCHIVE_STORE_PATH . "/" . $archive_info['id_hash'];
 
     mkdir($target_path);
@@ -52,10 +57,6 @@ class S3ArchiveManager {
     $s3_client = new Aws\S3\S3Client([
       'version' => 'latest',
       'region' => S3_REGION,
-      'credentials' => [
-        'key' => 'ASIAUACR7BITUUUNMRT5',
-        'secret' => 'JAoGV9+ECr+bJP8Z/iDv1UKpiB3t383rLBoVJCdv',
-      ],
     ]);
 
     $transfer_manager = new \Aws\S3\Transfer($s3_client, $target_path, S3_LOCATION);
