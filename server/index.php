@@ -63,6 +63,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     break;
 
   case '/site':
+    $archive_store = '/sites';
+
+    $s3_enabled = getenv('S3_ENABLED');
+    $s3_url = getenv('S3_URL');
+
+    if (!empty($s3_enabled) && $s3_enabled != 1 && $s3_enabled != 0) {
+      throw new Exception('Environment variable S3_ENABLED must be equal to 0 or 1!');
+    }
+
+    if ($s3_enabled == 1 && empty($s3_url)) {
+      throw new Exception('Please set environment variables required for using AWS S3 service: [S3_URL]');
+    }
+
+    if ($s3_enabled == 1) {
+      $archive_store = $s3_url;
+    }
+
     $title = 'View Page';
     $view = 'site';
     $resource=$_GET['resource'];

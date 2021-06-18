@@ -10,7 +10,7 @@ class DBConn {
     $dbpass = getenv('DBPASS');
 
     if (empty($dbhost) || empty($dbname) || empty($dbuser) || empty($dbpass)) {
-      throw new Exception('Please set all environment variables required: [DBHOST, DBNAME, DBUSER, DBPASS]');
+      throw new Exception('Please set required db environment variables: [DBHOST, DBNAME, DBUSER, DBPASS]');
     }
 
     $this->connection = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass, [
