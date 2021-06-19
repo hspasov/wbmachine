@@ -45,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
          WHERE url = ?
 	 ) ORDER BY created_at
          ", [$url]);
-       
-       $parsed_url = parse_url($url)['host'];       
+      
+       $parsed_url = preg_replace('#^https?://#', '', $url);   
+          
        $timestamps = [];
        $id_hashes = [];
        while($contents = $sth->fetch()){
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $id_hash=$_GET['id_hash'];
     $url=$_GET['url'];
     $timestamp=$_GET['timestamp'];
-
+  
     $sth = $dbh->sql("
       SELECT id_hash, created_at
       FROM archives
