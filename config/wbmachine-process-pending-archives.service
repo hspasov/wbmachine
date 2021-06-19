@@ -7,4 +7,10 @@ Environment=DBHOST='localhost'
 Environment=DBNAME='wbmachine'
 Environment=DBUSER='wbmachine'
 Environment=DBPASS='ParolataESlozhna'
+Environment=S3_REGION='us-east-1'
+Environment=S3_LOCATION='s3://wbmachine'
+Environment=S3_ENABLED=0
+Environment=LOG_FILE='/var/log/wbmachinelog'
 ExecStart=php --php-ini /usr/share/wbmachine/config/php.ini /usr/share/wbmachine/scripts/process_pending_archives.php
+User=wbmachine
+Group=wbmachine
