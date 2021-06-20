@@ -104,6 +104,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
     break;
+  case '/view-api':
+    $url = $_GET['url'];
+
+    $sth = $dbh->sql("
+      SELECT id_hash, created_at
+      FROM archives
+      WHERE site_id = (
+        SELECT id
+        FROM sites
+        WHERE url = ?
+      )
+      ORDER BY created_at
+    ", [$url]);
+
+    $archives = [];
+
+    while($contents = $sth->fetch()) {
+      array_push($archives, [
+        'timestamp' => $contents['created_at'],
+        'id_hash' => $contents['id_hash'],
+      ]);
+    }
+
+    $result = [
+      'status' => 'ok',
+      'archives' => $archives,
+    ];
+
+    echo json_encode($result);
+
+    http_response_code(200);
+
+    die;
+  case '/site-api':
+    $url=$_GET['url'];
+    $id_hash=$_GET['id_hash'];
+    $host=$_GET['host'];
+
+    assert_peer(!empty($url) || !empty($id_hash), "Please provide either param `url` or `id_hash`");
+
+    if (empty($id_hash)) {
+      $sth = $dbh->sql("
+        SELECT id_hash, created_at
+        FROM archives
+        WHERE site_id = (
+          SELECT id
+          FROM sites
+          WHERE url = ?
+        )
+        ORDER BY created_at DESC
+        LIMIT 1
+      ", [$url]);
+
+      assert_peer($sth->rowCount() == 1, 'Archive not found!');
+
+      $archive_data = $sth->fetch();
+      $id_hash = $archive_data['id_hash'];
+    } else {
+      $sth = $dbh->sql("
+        SELECT *
+        FROM sites
+        WHERE id = (
+          SELECT site_id
+          FROM archives
+          WHERE id_hash = ?
+        )
+      ", [$id_hash]);
+
+      assert_peer($sth->rowCount() == 1, 'Archive not found!');
+
+      $site_data = $sth->fetch();
+      $url = $site_data['url'];
+    }
+
+    if (empty($host)) {
+      $host = '/sites';
+    }
+
+    $parsed_url = preg_replace('#^https?://#', '', $url);
+
+    $location = $host . '/' . $id_hash . '/' . $parsed_url;
+
+    header("Location: $location");
+
+    die;
 
   default:
     http_response_code(404);
