@@ -12,8 +12,7 @@ function set_status_pending (DBConn $dbh, int $archive_id) {
     UPDATE archives
     SET status_id = ?
     WHERE id = ?
-      AND status_id = ?
-  ", [ARCH_STATUS_IN_PROGRESS, $archive_id, ARCH_STATUS_PENDING]);
+  ", [ARCH_STATUS_IN_PROGRESS, $archive_id]);
 
   assert($sth->rowCount() === 1);
 }
@@ -58,7 +57,7 @@ function fetch_site_local (string $id_hash, string $url) {
   mkdir($target_path);
   chmod($target_path, 0755);
 
-  `wget --directory-prefix={$target_path} --convert-links --no-cookies --span-hosts --page-requisites {$url} 2>> {$log_file}`;
+  `"C:\Program Files (x86)\GnuWin32\bin\wget.exe" --no-check-certificate --directory-prefix={$target_path} --convert-links --no-cookies --span-hosts --page-requisites {$url} 2>> {$log_file}`;
 }
 
 
@@ -90,7 +89,7 @@ function fetch_site_s3 (string $id_hash, string $url) {
   mkdir($included_id_hash_target_path);
   chmod($included_id_hash_target_path, 0755);
 
-  `wget --directory-prefix={$included_id_hash_target_path} --convert-links --no-cookies --span-hosts --page-requisites {$url} 2>> {$log_file}`;
+  `"C:\Program Files (x86)\GnuWin32\bin\wget.exe" --no-check-certificate --directory-prefix={$included_id_hash_target_path} --convert-links --no-cookies --span-hosts --page-requisites {$url} 2>> {$log_file}`;
 
   $s3_client = new Aws\S3\S3Client([
     'version' => 'latest',
@@ -100,7 +99,8 @@ function fetch_site_s3 (string $id_hash, string $url) {
   $transfer_manager = new \Aws\S3\Transfer($s3_client, $target_path, $s3_location);
   $transfer_manager->transfer();
 
-  `rm -r {$target_path}`;
+  `del /s /q {$target_path}`;
+  `rmdir /s /q {$target_path}`;
 }
 
 
@@ -116,9 +116,9 @@ function start () {
   $sth = $dbh->sql("
     SELECT *
     FROM archives
-    WHERE status_id = ?
+    WHERE status_id IN (?, ?)
     ORDER BY created_at
-  ", [ARCH_STATUS_PENDING]);
+  ", [ARCH_STATUS_PENDING, ARCH_STATUS_IN_PROGRESS]);
 
   while ($archive = $sth->fetch()) {
     set_status_pending($dbh, $archive['id']);
