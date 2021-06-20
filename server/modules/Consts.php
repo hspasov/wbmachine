@@ -1,7 +1,7 @@
 <?php
 
-define('ARCHIVE_STORE_PATH', '/usr/share/wbmachine/views/public/sites');
-define('TMP_ARCHIVE_STORE_PATH', '/tmp/wbmachine/');
+define('ARCHIVE_STORE_PATH', 'c:/wbmachine/views/public/sites');
+define('TMP_ARCHIVE_STORE_PATH', 'c:/wbmachine/');
 
 define('SCHD_INTVL_NONE', 10);
 define('SCHD_INTVL_NOW', 20);

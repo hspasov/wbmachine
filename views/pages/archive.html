@@ -8,9 +8,13 @@
     <input type="text" id="url" name="url" required />
     <label for="schedule-interval-id">Schedule interval</label>
     <select id="schedule-interval-id" name="schedule_interval_id" required />
-      <?php foreach ($schedule_intervals as $schedule_interval): ?>
-        <option value="<?=$schedule_interval['id']?>"><?=$schedule_interval['name']?></option>
-      <?php endforeach; ?>
+      <?php foreach ($schedule_intervals as $schedule_interval) {
+        echo '<option ';
+        if ($schedule_interval['id'] == '20') {
+          echo 'selected ';
+        }
+        echo 'value="' . $schedule_interval['id'] . '">' . $schedule_interval['name'] . '</option>';
+      }?>
     </select>
     <input type="hidden" id="is-ui" name="is_ui" value="true" />
     <input type="submit" />
